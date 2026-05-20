@@ -21,8 +21,8 @@ Source logic: `src/modules/AutoColorModule.bas`
 
 1. `input`: `#0000FF`
 2. `formula`: `#000000`
-3. `worksheetLink`: `#008000`
-4. `workbookLink`: `#CC99FF`
+3. `worksheetLink`: `#000000`
+4. `workbookLink`: `#008000`
 5. `external`: `#00B0F0`
 6. `hyperlink`: `#FF8000`
 7. `partialInput`: `#800000`

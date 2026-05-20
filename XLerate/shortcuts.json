@@ -29,6 +29,11 @@
       "id": "ResetFormatSettings",
       "type": "ExecuteFunction",
       "name": "Reset format settings"
+    },
+    {
+      "id": "OpenTracePrecedentsDialog",
+      "type": "ExecuteFunction",
+      "name": "Open trace precedents"
     }
   ],
   "shortcuts": [
@@ -66,6 +71,12 @@
       "action": "ResetFormatSettings",
       "key": {
         "default": "Ctrl+Shift+0"
+      }
+    },
+    {
+      "action": "OpenTracePrecedentsDialog",
+      "key": {
+        "default": "Ctrl+Alt+T"
       }
     }
   ]

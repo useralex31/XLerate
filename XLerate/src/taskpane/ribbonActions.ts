@@ -227,6 +227,11 @@ async function resetFormatSettingsShortcut(): Promise<void> {
   await resetWorkbookFormatSettings();
 }
 
+async function openTracePrecedentsShortcut(): Promise<void> {
+  const settings = readWorkbookFormatSettings();
+  await openTraceDialog("precedents", settings.trace);
+}
+
 Office.actions.associate("openTracePrecedentsDialog", runOpenTracePrecedentsDialog);
 Office.actions.associate("openTraceDependentsDialog", runOpenTraceDependentsDialog);
 Office.actions.associate("runSwitchSign", runSwitchSignFromRibbon);
@@ -245,3 +250,4 @@ Office.actions.associate("CycleDateFormat", cycleDateFormatShortcut);
 Office.actions.associate("CycleTextStyle", cycleTextStyleShortcut);
 Office.actions.associate("SmartFillRight", smartFillRightShortcut);
 Office.actions.associate("ResetFormatSettings", resetFormatSettingsShortcut);
+Office.actions.associate("OpenTracePrecedentsDialog", openTracePrecedentsShortcut);

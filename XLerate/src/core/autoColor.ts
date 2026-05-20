@@ -28,8 +28,10 @@ const COMMON_FUNCTIONS = ["SUM", "AVERAGE", "COUNT", "LEFT", "RIGHT", "MID", "RO
 export const DEFAULT_AUTO_COLOR_PALETTE: AutoColorPalette = {
   input: "#0000FF",
   formula: "#000000",
-  worksheetLink: "#008000",
-  workbookLink: "#CC99FF",
+  // Banking convention: same-sheet refs are formulas (black); cross-sheet
+  // refs within the same workbook are links (green).
+  worksheetLink: "#000000",
+  workbookLink: "#008000",
   external: "#00B0F0",
   hyperlink: "#FF8000",
   partialInput: "#800000",

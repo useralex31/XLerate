@@ -17,7 +17,7 @@ describe("Auto-color contract (spec §3.12)", () => {
     expect(snap.fontColor).toBe(DEFAULT_AUTO_COLOR_PALETTE.input);
   });
 
-  it("colors a same-sheet formula green", async () => {
+  it("colors a same-sheet formula black", async () => {
     const port = new ExcelPortFake();
     port.setCellFormula(addr(0, 0), "=A1");
     port.setSelection([addr(0, 0)]);
@@ -27,7 +27,7 @@ describe("Auto-color contract (spec §3.12)", () => {
     expect(snap.fontColor).toBe(DEFAULT_AUTO_COLOR_PALETTE.worksheetLink);
   });
 
-  it("colors a workbook-link formula purple", async () => {
+  it("colors a workbook-link formula green", async () => {
     const port = new ExcelPortFake();
     port.setCellFormula(addr(0, 0), "=Inputs!A1");
     port.setSelection([addr(0, 0)]);
