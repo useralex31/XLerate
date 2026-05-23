@@ -29,6 +29,7 @@ import {
 } from "./formatSettingsStore";
 import { openTraceDialog } from "./traceDialogLauncher";
 import {
+  applyBeautySaveAction,
   applyFormulaConsistencyAction,
   applySmartFillRightAction,
 } from "./workbookActions";
@@ -194,6 +195,12 @@ async function runResetFormatSettingsFromRibbon(event: Office.AddinCommands.Even
   await finish(event, () => resetWorkbookFormatSettings());
 }
 
+async function runBeautySaveFromRibbon(event: Office.AddinCommands.Event): Promise<void> {
+  await finish(event, async () => {
+    await applyBeautySaveAction();
+  });
+}
+
 async function cycleNumberFormatShortcut(): Promise<void> {
   const settings = readWorkbookFormatSettings();
   await runCycleNumberFormatService(new ExcelPortLive(), settings.numberFormats);
@@ -244,6 +251,7 @@ Office.actions.associate("runCycleTextStyle", runCycleTextStyleFromRibbon);
 Office.actions.associate("runAutoColor", runAutoColorFromRibbon);
 Office.actions.associate("runInsertCagr", runInsertCagrFromRibbon);
 Office.actions.associate("resetFormatSettings", runResetFormatSettingsFromRibbon);
+Office.actions.associate("runBeautySave", runBeautySaveFromRibbon);
 Office.actions.associate("CycleNumberFormat", cycleNumberFormatShortcut);
 Office.actions.associate("CycleCellFormat", cycleCellFormatShortcut);
 Office.actions.associate("CycleDateFormat", cycleDateFormatShortcut);

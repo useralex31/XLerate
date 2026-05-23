@@ -1,4 +1,4 @@
-/* global Excel */
+/* global Excel, Office */
 
 import {
   analyzeHorizontalFormulaConsistency,
@@ -199,5 +199,71 @@ export async function applySmartFillRightAction(): Promise<SmartFillRightResult>
     await context.sync();
     out = { ok: true, boundaryColumn1Based: boundaryAbsCol + 1 };
   });
+  return out;
+}
+
+// ---- Beauty Save ----
+
+const BEAUTY_SAVE_ZOOM = 90;
+
+export type BeautySaveResult = {
+  sheetsNormalized: number;
+  zoomApplied: boolean;
+  saved: boolean;
+};
+
+/**
+ * Normalize every visible sheet to a uniform view (zoom 90 %, cursor at A1
+ * with the viewport scrolled there), then land on the first visible sheet
+ * and save the workbook. Hidden / VeryHidden sheets are skipped — activating
+ * one would throw.
+ *
+ * Zoom is set via Excel.Window.zoom (ExcelApiDesktop 1.1) and gated by
+ * isSetSupported, matching the pattern used by Workbook.focus in
+ * traceDialogLauncher. The save call is the proper Excel.run save(), not
+ * Office.context.document.settings.saveAsync — the latter is the
+ * undo-chain trap documented in CLAUDE.md.
+ */
+export async function applyBeautySaveAction(): Promise<BeautySaveResult> {
+  let out: BeautySaveResult = {
+    sheetsNormalized: 0,
+    zoomApplied: false,
+    saved: false,
+  };
+  const zoomSupported = Office.context.requirements.isSetSupported(
+    "ExcelApiDesktop",
+    "1.1"
+  );
+
+  await Excel.run(async (context) => {
+    const workbook = context.workbook;
+    const sheets = workbook.worksheets;
+    sheets.load("items/visibility");
+    await context.sync();
+
+    const visible = sheets.items.filter((s) => s.visibility === "Visible");
+    if (visible.length === 0) return;
+
+    for (const sheet of visible) {
+      sheet.activate();
+      sheet.getRange("A1").select();
+      if (zoomSupported) {
+        workbook.windows.getItemAt(0).zoom = BEAUTY_SAVE_ZOOM;
+      }
+      await context.sync();
+    }
+
+    visible[0].activate();
+    visible[0].getRange("A1").select();
+    workbook.save();
+    await context.sync();
+
+    out = {
+      sheetsNormalized: visible.length,
+      zoomApplied: zoomSupported,
+      saved: true,
+    };
+  });
+
   return out;
 }

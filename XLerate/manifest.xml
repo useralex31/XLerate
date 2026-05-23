@@ -222,6 +222,21 @@
                     <FunctionName>runAutoColor</FunctionName>
                   </Action>
                 </Control>
+                <Control xsi:type="Button" id="BeautySaveBtn">
+                  <Label resid="BeautySaveBtn.Label"/>
+                  <Supertip>
+                    <Title resid="BeautySaveBtn.Label"/>
+                    <Description resid="BeautySaveBtn.Tooltip"/>
+                  </Supertip>
+                  <Icon>
+                    <bt:Image size="16" resid="Icon.16x16"/>
+                    <bt:Image size="32" resid="Icon.32x32"/>
+                    <bt:Image size="80" resid="Icon.80x80"/>
+                  </Icon>
+                  <Action xsi:type="ExecuteFunction">
+                    <FunctionName>runBeautySave</FunctionName>
+                  </Action>
+                </Control>
               </Group>
               <Group id="SettingsGroup">
                 <Label resid="SettingsGroup.Label"/>
@@ -327,6 +342,7 @@
         <bt:String id="CycleCellBtn.Label" DefaultValue="Cycle Cell"/>
         <bt:String id="CycleTextBtn.Label" DefaultValue="Cycle Text Style"/>
         <bt:String id="AutoColorBtn.Label" DefaultValue="Auto-color"/>
+        <bt:String id="BeautySaveBtn.Label" DefaultValue="Beauty Save"/>
       </bt:ShortStrings>
       <bt:LongStrings>
         <bt:String id="GetStarted.Description" DefaultValue="Open the XLerate tab to run modeling commands, or choose Show Task Pane to edit workbook settings."/>
@@ -342,6 +358,7 @@
         <bt:String id="CycleCellBtn.Tooltip" DefaultValue="Cycle the selection through cell-format presets (Normal, Inputs, Good, Bad, Important)."/>
         <bt:String id="CycleTextBtn.Tooltip" DefaultValue="Cycle the selection through text-style presets (Heading, Subheading, Sum, Normal)."/>
         <bt:String id="AutoColorBtn.Tooltip" DefaultValue="Color-code values in the selection by content type: blue for numeric inputs, green for cross-sheet references, orange for hyperlinks, black for local formulas."/>
+        <bt:String id="BeautySaveBtn.Tooltip" DefaultValue="Set every visible sheet to 90% zoom, place the cursor at A1 on each, land on the first sheet, and save the workbook."/>
       </bt:LongStrings>
     </Resources>
   </VersionOverrides>
